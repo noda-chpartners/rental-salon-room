@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Concept from '../components/Concept.astro';
+import Benefits from '../components/Benefits.astro';
+import Audience from '../components/Audience.astro';
+import Information from '../components/Information.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'レンタルエステルーム｜香川県高松市';
+const description = '香川県高松市のレンタルエステルーム。予約が入った分だけ支払う、セラピストのための施術スペースです。';
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  <main class="site-main">
+    <Hero />
+    <Concept />
+    <Benefits />
+    <Audience />
+    <Information />
+    <Contact />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const body = document.querySelector('.site-body');
+  const header = document.querySelector('[data-header]');
+
+  body?.classList.remove('is-loading');
+
+  if (!reduceMotion) {
+    const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+    intro
+      .to('.hero__title-inner', { y: 0, duration: 1.25, stagger: 0.13 }, 0.2)
+      .to('.hero__eyebrow', { opacity: 1, duration: 0.8 }, 0.45)
+      .to('.hero__lead', { opacity: 1, y: 0, duration: 0.8 }, 0.7)
+      .to('.hero__actions', { opacity: 1, duration: 0.8 }, 0.9)
+      .to('.hero__scroll', { opacity: 1, duration: 0.8 }, 1);
+
+    gsap.to('[data-hero-media]', {
+      yPercent: 14,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '[data-hero]',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      },
+    });
+
+    gsap.utils.toArray<HTMLElement>('.reveal').forEach((element) => {
+      gsap.set(element, { y: 54, opacity: 0, visibility: 'visible' });
+      gsap.to(element, {
+        y: 0,
+        opacity: 1,
+        duration: 1.05,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 88%',
+          once: true,
+        },
+      });
+    });
+
+    gsap.to('.concept__marquee-text', {
+      xPercent: -26,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.concept__marquee',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1,
+      },
+    });
+
+    gsap.utils.toArray<HTMLElement>('[data-magnetic]').forEach((element) => {
+      element.addEventListener('pointermove', (event) => {
+        const bounds = element.getBoundingClientRect();
+        const x = event.clientX - bounds.left - bounds.width / 2;
+        const y = event.clientY - bounds.top - bounds.height / 2;
+        gsap.to(element, { x: x * 0.12, y: y * 0.12, duration: 0.4, ease: 'power2.out' });
+      });
+
+      element.addEventListener('pointerleave', () => {
+        gsap.to(element, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
+      });
+    });
+  } else {
+    gsap.set('.hero__title-inner', { y: 0 });
+    gsap.set('.hero__eyebrow, .hero__lead, .hero__actions, .hero__scroll', { opacity: 1 });
+  }
+
+  const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, { passive: true });
+</script>

@@ -1,0 +1,162 @@
+---
+import { CalendarCheck, TrendingDown, MapPinned } from '@lucide/astro';
+import SectionTitle from './SectionTitle.astro';
+
+const benefits = [
+  {
+    number: '01',
+    title: '予約が入った分だけの支払い',
+    copy: '利用した分だけ支払う、必要に応じた使い方ができます。',
+    icon: CalendarCheck,
+  },
+  {
+    number: '02',
+    title: '開業初期の固定費を削減',
+    copy: '開業したばかりの方も、毎月の固定費を抑えられます。',
+    icon: TrendingDown,
+  },
+  {
+    number: '03',
+    title: '複数エリアで施術',
+    copy: '活動エリアを広げ、複数の地域で施術を行えます。',
+    icon: MapPinned,
+  },
+];
+---
+
+<section class="benefits" id="benefits">
+  <div class="benefits__inner container">
+    <SectionTitle eyebrow="BENEFITS" title="軽やかに働く、3つの理由。" />
+
+    <div class="benefits__grid">
+      {benefits.map(({ number, title, copy, icon: Icon }) => (
+        <article class="benefits__card reveal">
+          <div class="benefits__card-head">
+            <span class="benefits__number">{number}</span>
+            <span class="benefits__icon"><Icon size={24} stroke-width={1.1} aria-hidden="true" /></span>
+          </div>
+          <h3 class="benefits__title">{title}</h3>
+          <p class="benefits__copy">{copy}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .benefits {
+    position: relative;
+    padding: clamp(8rem, 13vw, 12rem) 0;
+    background: var(--color-paper);
+
+    &__inner {
+      display: grid;
+      gap: clamp(4rem, 8vw, 7rem);
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(1rem, 2.5vw, 2.2rem);
+      align-items: start;
+    }
+
+    &__card {
+      position: relative;
+      display: flex;
+      min-height: 27rem;
+      flex-direction: column;
+      padding: clamp(1.5rem, 2.8vw, 2.5rem);
+      background: var(--color-white);
+      border: 1px solid rgba(48, 45, 41, 0.12);
+      border-radius: 1.5rem;
+      box-shadow: 0 1.5rem 4rem rgba(69, 56, 43, 0.055);
+      overflow: hidden;
+      transition: color 0.55s var(--ease-out-expo), background 0.55s var(--ease-out-expo), transform 0.55s var(--ease-out-expo);
+    }
+
+    &__card::after {
+      position: absolute;
+      right: -5rem;
+      bottom: -5rem;
+      width: 13rem;
+      height: 13rem;
+      border: 1px solid rgba(154, 118, 86, 0.18);
+      border-radius: 50%;
+      content: "";
+    }
+
+    &__card:nth-child(2) {
+      margin-top: 4.5rem;
+    }
+
+    &__card:hover {
+      color: var(--color-white);
+      background: var(--color-accent);
+      transform: translateY(-0.75rem);
+    }
+
+    &__card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &__number {
+      color: var(--color-accent);
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      line-height: 1;
+      transition: color 0.4s ease;
+    }
+
+    &__card:hover .benefits__number {
+      color: var(--color-white);
+    }
+
+    &__icon {
+      display: grid;
+      width: 3.5rem;
+      height: 3.5rem;
+      place-items: center;
+      color: var(--color-accent);
+      background: var(--color-paper);
+      border-radius: 50%;
+    }
+
+    &__title {
+      max-width: 11em;
+      margin-top: auto;
+      font-family: var(--font-serif);
+      font-size: clamp(1.45rem, 2.15vw, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.55;
+    }
+
+    &__copy {
+      max-width: 20rem;
+      margin-top: 1.4rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      line-height: 1.95;
+      opacity: 0.62;
+    }
+  }
+
+  @media (max-width: 850px) {
+    .benefits {
+      &__grid {
+        grid-template-columns: 1fr;
+      }
+
+      &__card {
+        min-height: 21rem;
+      }
+
+      &__card:nth-child(2) {
+        margin-top: 0;
+      }
+    }
+  }
+</style>

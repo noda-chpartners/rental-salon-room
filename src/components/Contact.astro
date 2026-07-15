@@ -1,0 +1,184 @@
+---
+import { ArrowUpRight, Phone } from '@lucide/astro';
+---
+
+<section class="contact">
+  <div class="contact__outer container">
+    <div class="contact__orb contact__orb--one" aria-hidden="true"></div>
+    <div class="contact__orb contact__orb--two" aria-hidden="true"></div>
+    <div class="contact__inner reveal">
+      <p class="contact__eyebrow eyebrow">CONTACT</p>
+      <h2 class="contact__title">
+        <span class="contact__title-line">部屋数・ご利用について、</span>
+        <span class="contact__title-line">お電話でお問い合わせください。</span>
+      </h2>
+      <a class="contact__link site-link focusable" href="tel:08090000764" data-magnetic>
+        <span class="contact__link-icon"><Phone size={19} stroke-width={1.3} aria-hidden="true" /></span>
+        <span class="contact__link-copy">
+          <span class="contact__link-label">PHONE</span>
+          <span class="contact__link-number">080-9000-0764</span>
+        </span>
+        <span class="contact__link-arrow"><ArrowUpRight size={26} stroke-width={1.2} aria-hidden="true" /></span>
+      </a>
+      <p class="contact__hours">営業時間 9:00〜24:00 ／ 平日・土日祝</p>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .contact {
+    padding: clamp(4rem, 8vw, 7rem) 0;
+    background: var(--color-paper);
+
+    &__outer {
+      position: relative;
+      padding: clamp(5rem, 10vw, 9rem) var(--page-gutter);
+      color: var(--color-white);
+      background: var(--color-ink);
+      border-radius: clamp(1.5rem, 4vw, 3rem);
+      overflow: hidden;
+    }
+
+    &__orb {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    &__orb--one {
+      top: -20rem;
+      right: -8rem;
+      width: 42rem;
+      height: 42rem;
+    }
+
+    &__orb--two {
+      right: 16rem;
+      bottom: -23rem;
+      width: 34rem;
+      height: 34rem;
+    }
+
+    &__inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      justify-items: center;
+      text-align: center;
+    }
+
+    &__eyebrow {
+      color: var(--color-accent-soft);
+    }
+
+    &__title {
+      margin-top: 2rem;
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4.3vw, 4.4rem);
+      font-weight: 400;
+      letter-spacing: -0.045em;
+      line-height: 1.35;
+    }
+
+    &__title-line {
+      display: block;
+      white-space: nowrap;
+    }
+
+    &__link {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      width: min(100%, 43rem);
+      margin-top: clamp(3rem, 6vw, 5rem);
+      padding: 0.75rem;
+      color: var(--color-ink);
+      background: var(--color-white);
+      border-radius: 999px;
+      text-align: left;
+      transition: color 0.4s ease, background 0.4s ease;
+    }
+
+    &__link:hover {
+      color: var(--color-white);
+      background: var(--color-accent);
+    }
+
+    &__link-icon,
+    &__link-arrow {
+      display: grid;
+      width: 3.8rem;
+      height: 3.8rem;
+      place-items: center;
+      border: 1px solid rgba(48, 45, 41, 0.15);
+      border-radius: 50%;
+    }
+
+    &__link-icon {
+      color: var(--color-white);
+      background: var(--color-accent);
+      border-color: transparent;
+    }
+
+    &__link-copy {
+      display: grid;
+      line-height: 1.25;
+    }
+
+    &__link-label {
+      font-size: 0.53rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      opacity: 0.5;
+    }
+
+    &__link-number {
+      font-family: var(--font-serif);
+      font-size: clamp(1.35rem, 3vw, 2.25rem);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    &__hours {
+      margin-top: 1.25rem;
+      color: rgba(255, 253, 249, 0.5);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .contact {
+      &__outer {
+        width: calc(100% - 1.5rem);
+        padding-right: 1rem;
+        padding-left: 1rem;
+      }
+
+      &__title {
+        font-size: clamp(1.35rem, 6.1vw, 2rem);
+      }
+
+      &__link {
+        grid-template-columns: auto 1fr;
+        gap: 0.85rem;
+      }
+
+      &__link-icon {
+        width: 3.1rem;
+        height: 3.1rem;
+      }
+
+      &__link-arrow {
+        display: none;
+      }
+
+      &__link-number {
+        font-size: 1.15rem;
+      }
+    }
+  }
+</style>

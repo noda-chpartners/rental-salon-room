@@ -1,0 +1,58 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  description?: string;
+  theme?: 'light' | 'dark';
+}
+
+const { eyebrow, title, description, theme = 'light' } = Astro.props;
+---
+
+<header class:list={["section-title", `section-title--${theme}`, "reveal"]}>
+  <p class="section-title__eyebrow eyebrow">{eyebrow}</p>
+  <h2 class="section-title__heading">{title}</h2>
+  {description && <p class="section-title__description">{description}</p>}
+</header>
+
+<style lang="scss">
+  .section-title {
+    display: grid;
+    gap: clamp(1rem, 2vw, 1.75rem);
+    max-width: 100%;
+
+    &__heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 5.35vw, 5.4rem);
+      font-weight: 400;
+      letter-spacing: -0.045em;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    &__description {
+      max-width: 40rem;
+      color: rgba(23, 23, 20, 0.68);
+      font-size: clamp(0.9rem, 1.25vw, 1.05rem);
+      letter-spacing: 0.05em;
+      line-height: 2;
+    }
+
+    &--dark {
+      color: var(--color-white);
+    }
+
+    &--dark .section-title__description {
+      color: rgba(255, 253, 248, 0.62);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .section-title {
+      &__heading {
+        font-size: clamp(1.5rem, 6.4vw, 2.15rem);
+        letter-spacing: -0.035em;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,125 @@
+:root {
+  --color-ink: #302d29;
+  --color-paper: #f8f5ef;
+  --color-paper-deep: #ebe4da;
+  --color-sand: #d7c8b8;
+  --color-accent: #9a7656;
+  --color-accent-soft: #c4a98f;
+  --color-line: rgba(48, 45, 41, 0.16);
+  --color-white: #fffdf9;
+  --font-serif: "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", serif;
+  --font-sans: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --content-width: 1280px;
+  --page-gutter: clamp(1.25rem, 4.4vw, 4.5rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.site-document {
+  scroll-behavior: smooth;
+  background: var(--color-paper);
+}
+
+.site-body {
+  min-width: 320px;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.85;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-body.is-loading {
+  overflow: hidden;
+}
+
+.site-main {
+  position: relative;
+  overflow: clip;
+}
+
+.site-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-button {
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+}
+
+.site-list {
+  list-style: none;
+}
+
+.site-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.container {
+  width: min(calc(100% - (var(--page-gutter) * 2)), var(--content-width));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-accent);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  width: 2.8rem;
+  height: 1px;
+  background: currentColor;
+  content: "";
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.reveal {
+  visibility: hidden;
+}
+
+.focusable:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-document {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    visibility: visible;
+  }
+}

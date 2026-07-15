@@ -1,0 +1,74 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer__inner container">
+    <a class="footer__brand site-link focusable" href="#top">
+      <span class="footer__brand-mark">R</span>
+      <span class="footer__brand-name">RENTAL ESTHE ROOM</span>
+    </a>
+    <p class="footer__company">運営：合同会社STELLA BAS</p>
+    <p class="footer__copyright">© {currentYear} RENTAL ESTHE ROOM</p>
+  </div>
+</footer>
+
+<style lang="scss">
+  .footer {
+    padding: 1rem 0 2.5rem;
+    color: rgba(48, 45, 41, 0.56);
+    background: var(--color-paper);
+
+    &__inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    &__brand {
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      gap: 0.7rem;
+      color: var(--color-ink);
+    }
+
+    &__brand-mark {
+      display: grid;
+      width: 2rem;
+      height: 2rem;
+      place-items: center;
+      color: var(--color-white);
+      background: var(--color-ink);
+      border-radius: 50%;
+      font-family: var(--font-serif);
+      font-size: 0.9rem;
+    }
+
+    &__brand-name,
+    &__company,
+    &__copyright {
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    }
+
+    &__copyright {
+      justify-self: end;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .footer {
+      &__inner {
+        grid-template-columns: 1fr;
+      }
+
+      &__company,
+      &__copyright {
+        justify-self: start;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,277 @@
+---
+import { Image } from 'astro:assets';
+import { ArrowDownRight, Phone } from '@lucide/astro';
+import heroImage from '../assets/images/hero-room.png';
+---
+
+<section class="hero" id="top" data-hero>
+  <div class="hero__media" data-hero-media>
+    <Image
+      class="hero__image site-image"
+      src={heroImage}
+      alt="落ち着いたエステルームのイメージ"
+      width={1805}
+      height={871}
+      format="webp"
+      quality={88}
+      loading="eager"
+    />
+  </div>
+  <div class="hero__veil"></div>
+  <div class="hero__shape hero__shape--large" aria-hidden="true"></div>
+  <div class="hero__shape hero__shape--small" aria-hidden="true"></div>
+  <p class="hero__image-note">※イメージ写真</p>
+
+  <div class="hero__layout container">
+    <div class="hero__content">
+      <p class="hero__eyebrow">RENTAL ESTHE ROOM · TAKAMATSU</p>
+      <h1 class="hero__title" aria-label="必要な場所を、必要な時間だけ。">
+        <span class="hero__title-line"><span class="hero__title-inner">必要な場所を、</span></span>
+        <span class="hero__title-line hero__title-line--indent"><span class="hero__title-inner">必要な時間だけ。</span></span>
+      </h1>
+      <p class="hero__lead">予約が入った分だけ支払う、<br class="hero__lead-break" />セラピストのためのレンタルエステルーム。</p>
+      <div class="hero__actions">
+        <a class="hero__cta site-link focusable" href="tel:08090000764" data-magnetic>
+          <span class="hero__cta-icon"><Phone size={17} stroke-width={1.4} aria-hidden="true" /></span>
+          <span class="hero__cta-copy">
+            <span class="hero__cta-label">電話で問い合わせる</span>
+            <span class="hero__cta-number">080-9000-0764</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <a class="hero__scroll site-link focusable" href="#concept" aria-label="次のセクションへ">
+    <span class="hero__scroll-label">SCROLL</span>
+    <ArrowDownRight size={20} stroke-width={1.2} aria-hidden="true" />
+  </a>
+</section>
+
+<style lang="scss">
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    color: var(--color-white);
+    background: var(--color-ink);
+    overflow: hidden;
+
+    &__media,
+    &__veil {
+      position: absolute;
+      inset: 0;
+    }
+
+    &__media {
+      scale: 1.06;
+    }
+
+    &__image {
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(0.76) contrast(0.94);
+    }
+
+    &__veil {
+      z-index: 1;
+      background:
+        linear-gradient(90deg, rgba(34, 30, 26, 0.78) 0%, rgba(34, 30, 26, 0.52) 38%, rgba(34, 30, 26, 0.08) 76%),
+        linear-gradient(0deg, rgba(34, 30, 26, 0.5) 0%, transparent 50%);
+    }
+
+    &__layout {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      min-height: 100svh;
+      align-items: flex-end;
+      padding-top: 8rem;
+      padding-bottom: clamp(5rem, 10vh, 8rem);
+    }
+
+    &__content {
+      display: grid;
+      gap: clamp(1.2rem, 2.3vw, 2rem);
+      max-width: 55rem;
+    }
+
+    &__eyebrow {
+      color: var(--color-accent-soft);
+      font-size: 0.64rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      opacity: 0;
+    }
+
+    &__title {
+      width: max-content;
+      max-width: 100%;
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 6.2vw, 6.4rem);
+      font-weight: 400;
+      letter-spacing: -0.055em;
+      line-height: 1.12;
+    }
+
+    &__title-line {
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    &__title-line--indent {
+      padding-left: clamp(0rem, 6vw, 5.5rem);
+      color: var(--color-accent-soft);
+    }
+
+    &__title-inner {
+      display: block;
+      transform: translateY(110%);
+    }
+
+    &__lead {
+      max-width: 33rem;
+      color: rgba(255, 253, 249, 0.72);
+      font-family: var(--font-serif);
+      font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+      letter-spacing: 0.07em;
+      line-height: 2;
+      opacity: 0;
+    }
+
+    &__actions {
+      opacity: 0;
+    }
+
+    &__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.35rem 1.4rem 0.35rem 0.35rem;
+      color: var(--color-ink);
+      background: var(--color-white);
+      border-radius: 999px;
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.18);
+      transition: color 0.4s ease, background 0.4s ease;
+    }
+
+    &__cta:hover {
+      color: var(--color-white);
+      background: var(--color-accent);
+    }
+
+    &__cta-icon {
+      display: grid;
+      width: 3.2rem;
+      height: 3.2rem;
+      place-items: center;
+      color: var(--color-white);
+      background: var(--color-ink);
+      border-radius: 50%;
+    }
+
+    &__cta-copy {
+      display: grid;
+      line-height: 1.35;
+    }
+
+    &__cta-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    }
+
+    &__cta-number {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+    }
+
+    &__image-note {
+      position: absolute;
+      z-index: 3;
+      right: var(--page-gutter);
+      bottom: 1.75rem;
+      color: rgba(255, 253, 249, 0.55);
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+    }
+
+    &__shape {
+      position: absolute;
+      z-index: 2;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    &__shape--large {
+      top: -28vw;
+      right: -15vw;
+      width: 72vw;
+      height: 72vw;
+    }
+
+    &__shape--small {
+      bottom: -20vw;
+      left: -12vw;
+      width: 38vw;
+      height: 38vw;
+    }
+
+    &__scroll {
+      position: absolute;
+      z-index: 3;
+      right: var(--page-gutter);
+      bottom: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: rgba(255, 253, 249, 0.62);
+      opacity: 0;
+    }
+
+    &__scroll-label {
+      font-size: 0.54rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .hero {
+      &__image {
+        object-position: 68% center;
+      }
+
+      &__veil {
+        background:
+          linear-gradient(90deg, rgba(34, 30, 26, 0.76), rgba(34, 30, 26, 0.2)),
+          linear-gradient(0deg, rgba(34, 30, 26, 0.72) 0%, rgba(34, 30, 26, 0.12) 76%);
+      }
+
+      &__layout {
+        align-items: flex-end;
+        padding-bottom: 5rem;
+      }
+
+      &__title {
+        font-size: clamp(2.15rem, 10vw, 3.8rem);
+      }
+
+      &__title-line--indent {
+        padding-left: 0;
+      }
+
+      &__scroll {
+        display: none;
+      }
+
+      &__image-note {
+        bottom: 1.25rem;
+      }
+    }
+  }
+</style>

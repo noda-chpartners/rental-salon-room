@@ -1,0 +1,170 @@
+---
+import { Clock3 } from '@lucide/astro';
+---
+
+<section class="concept" id="concept">
+  <div class="concept__inner container">
+    <div class="concept__index reveal">
+      <span class="concept__index-number">01</span>
+      <span class="concept__index-label">CONCEPT</span>
+    </div>
+    <div class="concept__content">
+      <p class="concept__eyebrow eyebrow reveal">PAY AS YOU USE</p>
+      <h2 class="concept__title reveal">料金は、<br />利用した分だけ。</h2>
+      <div class="concept__detail reveal">
+        <span class="concept__icon"><Clock3 size={23} stroke-width={1.2} aria-hidden="true" /></span>
+        <p class="concept__copy">予約が入った分だけの支払いだから、固定費を抑えながら、自分らしい働き方を選べます。</p>
+      </div>
+    </div>
+  </div>
+  <div class="concept__marquee" aria-hidden="true">
+    <span class="concept__marquee-text">SPACE WHEN YOU NEED IT · SPACE WHEN YOU NEED IT ·</span>
+  </div>
+</section>
+
+<style lang="scss">
+  .concept {
+    position: relative;
+    padding: clamp(8rem, 15vw, 14rem) 0 clamp(5rem, 9vw, 8rem);
+    background: var(--color-paper-deep);
+    overflow: hidden;
+
+    &::before {
+      position: absolute;
+      top: -14rem;
+      left: 8%;
+      width: 30rem;
+      height: 30rem;
+      border: 1px solid rgba(154, 118, 86, 0.18);
+      border-radius: 50%;
+      content: "";
+    }
+
+    &__inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(5rem, 0.45fr) minmax(0, 2.55fr);
+      gap: clamp(2rem, 6vw, 7rem);
+    }
+
+    &__index {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: rgba(48, 45, 41, 0.45);
+      writing-mode: vertical-rl;
+    }
+
+    &__index-number {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
+    &__index-label {
+      font-size: 0.56rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+    }
+
+    &__content {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.7fr);
+      gap: clamp(2rem, 5vw, 6rem);
+      align-items: end;
+    }
+
+    &__eyebrow {
+      grid-column: 1 / -1;
+    }
+
+    &__title {
+      white-space: nowrap;
+      font-family: var(--font-serif);
+      font-size: clamp(3.4rem, 7vw, 7rem);
+      font-weight: 400;
+      letter-spacing: -0.065em;
+      line-height: 1.12;
+    }
+
+    &__detail {
+      position: relative;
+      display: grid;
+      gap: 2rem;
+      padding: clamp(1.8rem, 3.5vw, 3rem);
+      background: rgba(255, 253, 249, 0.74);
+      border: 1px solid rgba(48, 45, 41, 0.1);
+      border-radius: 8rem 8rem 1.25rem 1.25rem;
+      box-shadow: 0 1.5rem 4rem rgba(69, 56, 43, 0.07);
+    }
+
+    &__icon {
+      display: grid;
+      width: 3.5rem;
+      height: 3.5rem;
+      place-items: center;
+      color: var(--color-white);
+      background: var(--color-accent);
+      border-radius: 50%;
+    }
+
+    &__copy {
+      font-family: var(--font-serif);
+      font-size: clamp(1rem, 1.45vw, 1.18rem);
+      letter-spacing: 0.05em;
+      line-height: 2.05;
+    }
+
+    &__marquee {
+      margin-top: clamp(5rem, 12vw, 10rem);
+      color: transparent;
+      overflow: hidden;
+      -webkit-text-stroke: 1px rgba(48, 45, 41, 0.15);
+    }
+
+    &__marquee-text {
+      display: block;
+      width: max-content;
+      font-family: var(--font-serif);
+      font-size: clamp(4rem, 11vw, 10rem);
+      letter-spacing: -0.05em;
+      line-height: 0.8;
+      white-space: nowrap;
+      will-change: transform;
+    }
+  }
+
+  @media (max-width: 850px) {
+    .concept {
+      &__inner,
+      &__content {
+        grid-template-columns: 1fr;
+      }
+
+      &__index {
+        writing-mode: horizontal-tb;
+      }
+
+      &__title {
+        font-size: clamp(2.6rem, 10vw, 4.8rem);
+      }
+
+      &__detail {
+        max-width: 32rem;
+        justify-self: end;
+      }
+    }
+  }
+
+  @media (max-width: 520px) {
+    .concept {
+      &__title {
+        font-size: clamp(2.35rem, 11.5vw, 3.4rem);
+      }
+
+      &__detail {
+        border-radius: 6rem 6rem 1rem 1rem;
+      }
+    }
+  }
+</style>
