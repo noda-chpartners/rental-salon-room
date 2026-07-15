@@ -1,0 +1,357 @@
+---
+import { Image } from 'astro:assets';
+import { ArrowDownRight, Box, MessagesSquare } from '@lucide/astro';
+import SectionTitle from './SectionTitle.astro';
+import nailImage from '../assets/images/use-case-nail.png';
+import hairmakeImage from '../assets/images/use-case-hairmake.png';
+import stretchImage from '../assets/images/use-case-stretch.png';
+
+const useCases = [
+  '美容エステ',
+  'リンパトリートメント',
+  'ボディーケア',
+  'リラクゼーション整体',
+  'ストレッチ・姿勢改善',
+  'ヘアメイク',
+  'ネイル',
+  'メイクレッスン',
+];
+
+const scenes = [
+  { label: 'NAIL', alt: 'ネイル施術のイメージ', image: nailImage },
+  { label: 'HAIR & MAKEUP', alt: 'ヘアメイク施術のイメージ', image: hairmakeImage },
+  { label: 'STRETCH', alt: 'ストレッチ指導のイメージ', image: stretchImage },
+];
+---
+
+<section class="use-cases" id="use-cases">
+  <div class="use-cases__inner container">
+    <SectionTitle
+      eyebrow="USE CASES"
+      title="一室から、広がる使い方。"
+      description="美容施術からボディーケア、レッスンまで、幅広い用途でご利用いただけます。"
+    />
+
+    <div class="use-cases__gallery">
+      {scenes.map(({ label, alt, image }, index) => (
+        <figure class:list={["use-cases__scene", `use-cases__scene--${index + 1}`, "reveal"]}>
+          <Image
+            class="use-cases__image site-image"
+            src={image}
+            alt={alt}
+            width={1536}
+            height={1024}
+            format="webp"
+            quality={82}
+            loading="lazy"
+          />
+          <figcaption class="use-cases__scene-label">
+            <span class="use-cases__scene-index">0{index + 1}</span>
+            <span class="use-cases__scene-name">{label}</span>
+          </figcaption>
+        </figure>
+      ))}
+      <p class="use-cases__image-note">※AI生成によるイメージ写真</p>
+    </div>
+
+    <div class="use-cases__content">
+      <div class="use-cases__services reveal">
+        <p class="use-cases__content-label">利用例</p>
+        <ul class="use-cases__list site-list">
+          {useCases.map((item, index) => (
+            <li class="use-cases__item">
+              <span class="use-cases__item-number">{String(index + 1).padStart(2, '0')}</span>
+              <span class="use-cases__item-name">{item}</span>
+              <ArrowDownRight class="use-cases__item-icon" size={17} stroke-width={1.2} aria-hidden="true" />
+            </li>
+          ))}
+        </ul>
+        <p class="use-cases__wide-note">など、幅広くご利用可能です。</p>
+      </div>
+
+      <aside class="use-cases__notices reveal" aria-label="ご利用に関する確認事項">
+        <article class="use-cases__notice">
+          <span class="use-cases__notice-icon"><Box size={22} stroke-width={1.2} aria-hidden="true" /></span>
+          <div class="use-cases__notice-content">
+            <p class="use-cases__notice-label">EQUIPMENT</p>
+            <h3 class="use-cases__notice-title">備え付け備品について</h3>
+            <p class="use-cases__notice-copy">直接ご連絡してご確認ください。</p>
+          </div>
+        </article>
+
+        <article class="use-cases__notice use-cases__notice--accent">
+          <span class="use-cases__notice-icon"><MessagesSquare size={22} stroke-width={1.2} aria-hidden="true" /></span>
+          <div class="use-cases__notice-content">
+            <p class="use-cases__notice-label">BEFORE USE</p>
+            <h3 class="use-cases__notice-title">ご利用開始前に</h3>
+            <p class="use-cases__notice-copy">お打ち合わせしてからのご利用となります。</p>
+          </div>
+        </article>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .use-cases {
+    position: relative;
+    padding: clamp(8rem, 14vw, 13rem) 0;
+    background: var(--color-paper);
+    overflow: hidden;
+
+    &::before {
+      position: absolute;
+      top: 18rem;
+      left: -18rem;
+      width: 42rem;
+      height: 42rem;
+      border: 1px solid rgba(154, 118, 86, 0.14);
+      border-radius: 50%;
+      content: "";
+    }
+
+    &__inner {
+      position: relative;
+      display: grid;
+      gap: clamp(5rem, 9vw, 8rem);
+    }
+
+    &__gallery {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.35fr 0.8fr 0.8fr;
+      gap: clamp(0.75rem, 1.6vw, 1.5rem);
+      align-items: end;
+    }
+
+    &__scene {
+      position: relative;
+      min-width: 0;
+      border-radius: 1.35rem;
+      overflow: hidden;
+    }
+
+    &__scene--1 {
+      height: clamp(25rem, 46vw, 39rem);
+    }
+
+    &__scene--2,
+    &__scene--3 {
+      height: clamp(20rem, 36vw, 31rem);
+    }
+
+    &__scene--2 {
+      margin-bottom: clamp(2rem, 6vw, 5rem);
+    }
+
+    &__image {
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.78) contrast(0.95);
+      transition: scale 1s var(--ease-out-expo), filter 0.8s ease;
+    }
+
+    &__scene:hover .use-cases__image {
+      filter: saturate(0.95) contrast(0.98);
+      scale: 1.035;
+    }
+
+    &__scene-label {
+      position: absolute;
+      right: 0.75rem;
+      bottom: 0.75rem;
+      left: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem 0.9rem;
+      color: var(--color-white);
+      background: rgba(48, 45, 41, 0.58);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      backdrop-filter: blur(12px);
+    }
+
+    &__scene-index {
+      font-family: var(--font-serif);
+      font-size: 0.75rem;
+      opacity: 0.62;
+    }
+
+    &__scene-name {
+      font-size: 0.52rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+    }
+
+    &__image-note {
+      position: absolute;
+      right: 0;
+      bottom: -2rem;
+      color: rgba(48, 45, 41, 0.45);
+      font-size: 0.56rem;
+      letter-spacing: 0.1em;
+    }
+
+    &__content {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.85fr);
+      gap: clamp(2rem, 7vw, 7rem);
+      align-items: start;
+    }
+
+    &__content-label {
+      margin-bottom: 1.5rem;
+      color: var(--color-accent);
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      letter-spacing: 0.08em;
+    }
+
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border-top: 1px solid var(--color-line);
+    }
+
+    &__item {
+      display: grid;
+      grid-template-columns: 2rem 1fr auto;
+      gap: 0.75rem;
+      align-items: center;
+      min-height: 4.5rem;
+      padding: 0.8rem 1rem 0.8rem 0;
+      border-bottom: 1px solid var(--color-line);
+    }
+
+    &__item:nth-child(odd) {
+      margin-right: 1.25rem;
+    }
+
+    &__item-number {
+      color: var(--color-accent);
+      font-family: var(--font-serif);
+      font-size: 0.68rem;
+    }
+
+    &__item-name {
+      font-family: var(--font-serif);
+      font-size: clamp(0.88rem, 1.25vw, 1.05rem);
+      letter-spacing: 0.025em;
+    }
+
+    &__item-icon {
+      color: rgba(48, 45, 41, 0.35);
+    }
+
+    &__wide-note {
+      margin-top: 1.5rem;
+      font-family: var(--font-serif);
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      letter-spacing: 0.05em;
+    }
+
+    &__notices {
+      display: grid;
+      gap: 1rem;
+    }
+
+    &__notice {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.25rem;
+      padding: clamp(1.5rem, 3vw, 2.25rem);
+      background: var(--color-paper-deep);
+      border-radius: 1.25rem;
+    }
+
+    &__notice--accent {
+      color: var(--color-white);
+      background: var(--color-accent);
+    }
+
+    &__notice-icon {
+      display: grid;
+      width: 3.4rem;
+      height: 3.4rem;
+      place-items: center;
+      color: var(--color-accent);
+      background: var(--color-white);
+      border-radius: 50%;
+    }
+
+    &__notice-label {
+      margin-bottom: 0.6rem;
+      font-size: 0.52rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      opacity: 0.55;
+    }
+
+    &__notice-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+      font-weight: 400;
+      letter-spacing: 0.025em;
+    }
+
+    &__notice-copy {
+      margin-top: 0.65rem;
+      font-size: 0.76rem;
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+      opacity: 0.68;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .use-cases {
+      &__gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      &__scene--1 {
+        grid-column: 1 / -1;
+        height: min(72vw, 34rem);
+      }
+
+      &__scene--2,
+      &__scene--3 {
+        height: min(60vw, 28rem);
+        margin-bottom: 0;
+      }
+
+      &__content {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .use-cases {
+      &__gallery {
+        grid-template-columns: 1fr;
+      }
+
+      &__scene--1,
+      &__scene--2,
+      &__scene--3 {
+        grid-column: auto;
+        height: 24rem;
+      }
+
+      &__list {
+        grid-template-columns: 1fr;
+      }
+
+      &__item:nth-child(odd) {
+        margin-right: 0;
+      }
+
+      &__notice {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+</style>
